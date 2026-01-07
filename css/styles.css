@@ -1,0 +1,678 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark-2: #1a1a1a;
+    --white: #ffffff;
+    --gray: #888888;
+    --accent: #c8ff00; 
+    --accent-alt: #ff003c; 
+    --accent-blue: #00f0ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--black);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-1deg); }
+    40% { transform: skew(1deg); }
+    60% { transform: skew(0deg); }
+    80% { transform: skew(-1deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes scan-line {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes neon-pulse {
+    0%, 100% {
+        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+    }
+    50% {
+        text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
+    }
+}
+
+/* ===== Навигация ===== */
+.navbar {
+    background: var(--black) !important;
+    border-bottom: 1px solid var(--dark-2);
+    padding: 1rem 0;
+    position: relative;
+}
+
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.navbar-brand {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent) !important;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    position: relative;
+}
+
+.navbar-brand:hover {
+    animation: glitch 0.3s ease;
+}
+
+.navbar .nav-link {
+    font-family: 'Space Mono', monospace;
+    color: var(--gray) !important;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+}
+
+.navbar .nav-link:hover {
+    color: var(--accent) !important;
+}
+
+.navbar .btn-outline-light {
+    font-family: 'Space Mono', monospace;
+    background: transparent !important;
+    color: var(--accent) !important;
+    border: 1px solid var(--accent) !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 0;
+    padding: 0.5rem 1.25rem !important;
+    transition: all 0.2s ease;
+    text-transform: lowercase;
+}
+
+.navbar .btn-outline-light:hover {
+    background: var(--accent) !important;
+    color: var(--black) !important;
+    box-shadow: 0 0 20px var(--accent);
+}
+
+.navbar-toggler {
+    border: 1px solid var(--accent);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c8ff00' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ===== Hero секция ===== */
+.hero-section {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Сканлайн эффект */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.1;
+    animation: scan-line 8s linear infinite;
+    z-index: 1;
+}
+
+/* Фоновая сетка */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(var(--dark-2) 1px, transparent 1px),
+        linear-gradient(90deg, var(--dark-2) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    margin-bottom: 1.5rem;
+    text-transform: lowercase;
+    position: relative;
+}
+
+.hero-section h1::before {
+    content: 'открой мир без границ';
+    position: absolute;
+    left: 2px;
+    top: 0;
+    color: var(--accent-alt);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.hero-section h1::after {
+    content: 'открой мир без границ';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    color: var(--accent-blue);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.hero-section h1 span {
+    color: var(--accent);
+    display: inline-block;
+}
+
+.hero-section .lead {
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 400;
+    line-height: 1.8;
+    max-width: 500px;
+}
+
+.hero-section .lead strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.hero-section p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 0.9rem;
+}
+
+/* Кнопки */
+.hero-section .btn-primary {
+    font-family: 'Space Mono', monospace;
+    background: var(--accent);
+    border: none;
+    color: var(--black);
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 0;
+    text-transform: lowercase;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.hero-section .btn-primary:hover {
+    box-shadow: 0 0 30px var(--accent), 0 0 60px var(--accent);
+    transform: translateY(-2px);
+}
+
+.hero-section .btn-primary:hover::before {
+    left: 100%;
+}
+
+.hero-section .btn-outline-primary {
+    font-family: 'Space Mono', monospace;
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 0;
+    text-transform: lowercase;
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn-outline-primary:hover {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+}
+
+/* Hero визуал */
+.hero-image {
+    position: relative;
+    padding: 3rem;
+}
+
+.hero-icon-wrapper {
+    width: 300px;
+    height: 300px;
+    background: var(--dark);
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    animation: flicker 4s ease-in-out infinite;
+}
+
+.hero-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--accent-alt);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.hero-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid var(--accent-blue);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.hero-icon-wrapper:hover {
+    animation: glitch 0.5s ease;
+    box-shadow: 0 0 50px var(--accent);
+}
+
+.hero-icon-wrapper i {
+    font-size: 8rem;
+    color: var(--accent);
+}
+
+/* Плавающие бейджи */
+.floating-badges {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.floating-badge {
+    font-family: 'Space Mono', monospace;
+    position: absolute;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: var(--black) !important;
+    color: var(--accent) !important;
+    border: 1px solid var(--accent);
+    border-radius: 0;
+    animation: float 4s ease-in-out infinite;
+    text-transform: lowercase;
+}
+
+.floating-badge:nth-child(odd) {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue) !important;
+}
+
+.floating-badge:nth-child(3) {
+    border-color: var(--accent-alt);
+    color: var(--accent-alt) !important;
+}
+
+.badge-1 { top: 5%; left: 5%; animation-delay: 0s; }
+.badge-2 { top: 0%; right: 10%; animation-delay: 0.7s; }
+.badge-3 { top: 45%; left: -5%; animation-delay: 1.4s; }
+.badge-4 { top: 40%; right: -5%; animation-delay: 2.1s; }
+.badge-5 { bottom: 10%; left: 10%; animation-delay: 2.8s; }
+.badge-6 { bottom: 5%; right: 15%; animation-delay: 3.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+/* ===== Секция преимуществ ===== */
+.advantages-section {
+    background: var(--dark);
+    padding: 6rem 0;
+    position: relative;
+}
+
+.advantages-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-alt), var(--accent-blue), var(--accent));
+}
+
+.advantages-section h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+}
+
+.advantages-section > .container > .text-center > p {
+    font-family: 'Space Mono', monospace;
+    color: var(--gray);
+    font-size: 0.8rem;
+    text-transform: lowercase;
+    letter-spacing: 0.1em;
+}
+
+.advantage-card {
+    background: var(--black);
+    border: 1px solid var(--dark-2) !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.advantage-card:hover {
+    border-color: var(--accent) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(200, 255, 0, 0.1);
+}
+
+.advantage-card:hover::before {
+    transform: scaleX(1);
+}
+
+.advantage-icon {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent) !important;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.advantage-card:hover .advantage-icon {
+    background: var(--accent);
+    color: var(--black) !important;
+    box-shadow: 0 0 20px var(--accent);
+}
+
+.advantage-card .card-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: lowercase;
+}
+
+.advantage-card .card-text {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.7;
+}
+
+/* ===== Уведомления ===== */
+#notification-area {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 350px;
+}
+
+#notification-area .alert {
+    font-family: 'Space Mono', monospace;
+    background: var(--black);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0;
+    font-size: 0.8rem;
+    animation: slideIn 0.3s ease;
+}
+
+#notification-area .alert-success {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+#notification-area .alert-danger {
+    border-color: var(--accent-alt);
+    color: var(--accent-alt);
+}
+
+#notification-area .btn-close {
+    filter: invert(1);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ===== Футер ===== */
+footer {
+    background: var(--black) !important;
+    border-top: 1px solid var(--dark-2);
+    color: var(--white);
+    margin-top: auto;
+    padding: 4rem 0 2rem;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+footer h5, footer h6 {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+footer p, footer li {
+    color: var(--gray) !important;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: var(--gray) !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--accent) !important;
+}
+
+footer .bi {
+    font-size: 1.25rem;
+}
+
+footer hr {
+    border-color: var(--dark-2);
+    opacity: 1;
+}
+
+footer small {
+    font-family: 'Space Mono', monospace;
+    color: var(--gray);
+    font-size: 0.75rem;
+}
+
+/* ===== Кастомный скроллбар ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* ===== Адаптивность ===== */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: var(--black);
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 1px solid var(--dark-2);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: auto;
+        padding: 4rem 0;
+    }
+
+    .hero-section h1::before,
+    .hero-section h1::after {
+        display: none;
+    }
+
+    .hero-icon-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-icon-wrapper i {
+        font-size: 5rem;
+    }
+
+    .advantages-section {
+        padding: 4rem 0;
+    }
+
+    .floating-badge {
+        font-size: 0.6rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .floating-badges {
+        display: none;
+    }
+
+    .hero-icon-wrapper::before,
+    .hero-icon-wrapper::after {
+        display: none;
+    }
+}
